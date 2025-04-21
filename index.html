@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Portfolio Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
+    }
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background: url('https://wallpaperboat.com/wp-content/uploads/2019/10/cool-website-background-01.jpg') no-repeat center center/cover;
+      color: white;
+    }
+    header h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-in-out;
+    }
+    header p {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+    }
+    .cta-buttons button {
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      background-color: #00adb5;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .cta-buttons button:hover {
+      background-color: #007b83;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #form-section, #explore-section {
+      display: none;
+      background: white;
+      color: black;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 1000px;
+      margin: 50px auto;
+      animation: fadeIn 1s ease-in-out;
+      position: relative;
+    }
+    #form-section h2, #explore-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    #generate-btn {
+      background-color: #00adb5;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+    #portfolio-preview {
+      display: none;
+      background: white;
+      color: black;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    }
+    #download-btn {
+      margin: 20px auto;
+      display: none;
+      background-color: #2e8b57;
+      color: white;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      display: block;
+    }
+    .back-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #f05454;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌟 Portfolio Creator</h1>
+    <p>Build and Download Your Personalized Portfolio Instantly</p>
+    <div class="cta-buttons">
+      <button onclick="startPortfolio()">Make Portfolio</button>
+      <button onclick="showExplore()">Explore</button>
+    </div>
+  </header>
+
+  <div id="form-section">
+    <button class="back-btn" onclick="goBackToHome()">Back</button>
+    <h2>Fill in your Portfolio Details</h2>
+    <label>Profile Photo</label>
+    <input type="file" id="profileImage" accept="image/*">
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="linkedin" placeholder="LinkedIn URL">
+    <input type="text" id="github" placeholder="GitHub URL">
+    <input type="text" id="address" placeholder="Address">
+    <input type="text" id="dob" placeholder="Date of Birth">
+    <textarea id="careerObjective" placeholder="Career Objective"></textarea>
+    <textarea id="about" placeholder="About Me"></textarea>
+    <textarea id="education" placeholder="Education Details (Class 10th, 12th, Degree, etc.)"></textarea>
+    <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+    <textarea id="projects" placeholder="Projects (Title and Description)"></textarea>
+    <textarea id="experience" placeholder="Experience (Company, Role, Duration)"></textarea>
+    <textarea id="certifications" placeholder="Certifications (Course, Issuer)"></textarea>
+    <textarea id="hobbies" placeholder="Hobbies and Interests"></textarea>
+    <textarea id="languagesKnown" placeholder="Languages Known (comma separated)"></textarea>
+    <button id="generate-btn" onclick="generatePortfolio()">Generate Portfolio</button>
+  </div>
+
+  <div id="explore-section">
+    <button class="back-btn" onclick="goBackToHome()">Back</button>
+    <h2>About Our Portfolio Generator</h2>
+    <p>This platform allows you to create a professional portfolio with ease. Simply input your information, and we'll generate a beautifully styled portfolio you can preview and download instantly as a high-quality PDF.</p>
+    <ul>
+      <li>🎨 Clean and modern design</li>
+      <li>📄 High-resolution PDF export</li>
+      <li>🕊️ Easy and intuitive input form</li>
+      <li>🚀 Quick preview and customization</li>
+    </ul>
+    <p>Perfect for students, professionals, or anyone needing a sharp-looking resume or profile page!</p>
+  </div>
+
+  <div id="portfolio-preview"></div>
+  <button id="download-btn" onclick="downloadPDF()">Download PDF</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script>
+    function startPortfolio() {
+      document.querySelector('header').style.display = 'none';
+      document.getElementById('form-section').style.display = 'block';
+      document.getElementById('explore-section').style.display = 'none';
+    }
+
+    function showExplore() {
+      document.querySelector('header').style.display = 'none';
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('explore-section').style.display = 'block';
+    }
+
+    function goBackToHome() {
+      document.querySelector('header').style.display = 'flex';
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('explore-section').style.display = 'none';
+      document.getElementById('portfolio-preview').style.display = 'none';
+      document.getElementById('download-btn').style.display = 'none';
+    }
+
+    function generatePortfolio() {
+      const reader = new FileReader();
+      const imageFile = document.getElementById("profileImage").files[0];
+
+      reader.onloadend = function () {
+        const profileImageSrc = imageFile ? `<div style='text-align:center;'><img src='${reader.result}' style='max-width:150px; border-radius:50%; margin-bottom:15px;'></div>` : "";
+
+        const data = {
+          fullName: document.getElementById("fullName").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          linkedin: document.getElementById("linkedin").value,
+          github: document.getElementById("github").value,
+          address: document.getElementById("address").value,
+          dob: document.getElementById("dob").value,
+          careerObjective: document.getElementById("careerObjective").value,
+          about: document.getElementById("about").value,
+          education: document.getElementById("education").value,
+          skills: document.getElementById("skills").value.split(',').map(s => s.trim()),
+          projects: document.getElementById("projects").value,
+          experience: document.getElementById("experience").value,
+          certifications: document.getElementById("certifications").value,
+          hobbies: document.getElementById("hobbies").value,
+          languagesKnown: document.getElementById("languagesKnown").value
+        };
+
+        const htmlContent = `
+          ${profileImageSrc}
+          <h1 style="text-align:center;">${data.fullName}</h1>
+          <p style="text-align:center;">📧 ${data.email} | 📱 ${data.phone}</p>
+          <p style="text-align:center;">🏠 ${data.address} | 🎂 ${data.dob}</p>
+          <p style="text-align:center;">🔗 <a href="${data.linkedin}">${data.linkedin}</a> | 💻 <a href="${data.github}">${data.github}</a></p>
+          <hr />
+          <h2>Career Objective</h2>
+          <p>${data.careerObjective}</p>
+          <h2>About Me</h2>
+          <p>${data.about}</p>
+          <h2>Education</h2>
+          <p>${data.education.replace(/\n/g, '<br>')}</p>
+          <h2>Skills</h2>
+          <ul>${data.skills.map(skill => `<li>${skill}</li>`).join('')}</ul>
+          <h2>Projects</h2>
+          <p>${data.projects.replace(/\n/g, '<br>')}</p>
+          <h2>Experience</h2>
+          <p>${data.experience.replace(/\n/g, '<br>')}</p>
+          <h2>Certifications</h2>
+          <p>${data.certifications.replace(/\n/g, '<br>')}</p>
+          <h2>Hobbies</h2>
+          <p>${data.hobbies}</p>
+          <h2>Languages Known</h2>
+          <p>${data.languagesKnown}</p>
+        `;
+
+        const preview = document.getElementById("portfolio-preview");
+        preview.innerHTML = htmlContent;
+        preview.style.display = 'block';
+        document.getElementById("download-btn").style.display = 'block';
+      }
+
+      if (imageFile) {
+        reader.readAsDataURL(imageFile);
+      } else {
+        reader.onloadend();
+      }
+    }
+
+    function downloadPDF() {
+      const element = document.getElementById("portfolio-preview");
+      if (!element.innerHTML.trim()) {
+        alert("Please generate the portfolio first!");
+        return;
+      }
+      const opt = {
+        margin: 0.3,
+        filename: 'My_Professional_Portfolio.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
